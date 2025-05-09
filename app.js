@@ -1,4 +1,4 @@
-// بررسی نصب Service Worker
+// ثبت Service Worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
     .then((registration) => {
@@ -9,10 +9,35 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// مدیریت پیام‌ها
-async function getMessages() {
-  const receiverCode = 'receiver-code'; // کد گیرنده را وارد کنید
+// بررسی شماره در localStorage
+const storedPhone = localStorage.getItem('receiverCode');
+const phoneFormContainer = document.getElementById('phone-form-container');
+const messagesContainer = document.getElementById('messages-container');
 
+if (storedPhone) {
+  phoneFormContainer.style.display = 'none';
+  messagesContainer.style.display = 'block';
+  getMessages(storedPhone);
+} else {
+  phoneFormContainer.style.display = 'block';
+  messagesContainer.style.display = 'none';
+}
+
+// مدیریت فرم شماره
+const phoneForm = document.getElementById('phone-form');
+phoneForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const phone = document.getElementById('phone').value.trim();
+  if (phone) {
+    localStorage.setItem('receiverCode', phone);
+    phoneFormContainer.style.display = 'none';
+    messagesContainer.style.display = 'block';
+    getMessages(phone);
+  }
+});
+
+// دریافت پیام‌ها
+async function getMessages(receiverCode) {
   try {
     const response = await fetch(`https://kharazm.onrender.com/get_message/${receiverCode}`);
     const data = await response.json();
@@ -28,8 +53,7 @@ async function getMessages() {
 
 // نمایش پیام‌ها
 function displayMessages(messages) {
-  const messagesContainer = document.getElementById('messages-container');
-  messagesContainer.innerHTML = ''; // پاک کردن محتوای قبلی
+  messagesContainer.innerHTML = '';
   messages.forEach(message => {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
@@ -42,28 +66,5 @@ function displayMessages(messages) {
   });
 }
 
-// دریافت پیام‌ها
-getMessages();
-
 // نصب PWA
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  const installBtn = document.getElementById('install-btn');
-  installBtn.style.display = 'block';
-
-  installBtn.addEventListener('click', () => {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice
-      .then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-        deferredPrompt = null;
-      });
-  });
-});
+let deferred
