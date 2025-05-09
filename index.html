@@ -8,7 +8,10 @@
   
   <!-- فونت وزیر از Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
-
+  
+  <!-- لوگو -->
+  <link rel="icon" href="https://chatgpt.com/s/m_681ddaff34d48191b9d877155581c257" type="image/png">
+  
   <style>
     * {
       box-sizing: border-box;
@@ -16,7 +19,7 @@
     }
     body {
       margin: 0;
-      background: linear-gradient(135deg, #3a6073, #16222a);
+      background: linear-gradient(135deg, #ff7e5f, #feb47b); /* تم رنگی مشابه */
       color: #fff;
       display: flex;
       justify-content: center;
@@ -38,6 +41,10 @@
       margin-bottom: 20px;
       font-weight: 700;
     }
+    img.logo {
+      width: 100px;
+      margin-bottom: 20px;
+    }
     input[type="tel"] {
       width: 100%;
       padding: 12px;
@@ -48,7 +55,7 @@
       direction: rtl;
     }
     button {
-      background-color: #00c6ff;
+      background-color: #ff7e5f;
       color: #fff;
       padding: 12px 20px;
       border: none;
@@ -58,7 +65,7 @@
       transition: 0.3s;
     }
     button:hover {
-      background-color: #0072ff;
+      background-color: #feb47b;
     }
     #messages {
       margin-top: 20px;
@@ -69,6 +76,7 @@
 </head>
 <body>
   <div class="container">
+    <img src="https://chatgpt.com/s/m_681ddaff34d48191b9d877155581c257" alt="لوگو" class="logo">
     <h2>دریافت پیام</h2>
     <form id="code-form">
       <input type="tel" id="user-code" placeholder="شماره تلفن خود را وارد کنید" required>
