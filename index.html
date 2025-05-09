@@ -10,7 +10,16 @@
 </head>
 <body>
   <h1>پیام‌های من</h1>
-  <div id="messages-container"></div>
+
+  <div id="phone-form-container">
+    <form id="phone-form">
+      <label for="phone">شماره تلفن:</label>
+      <input type="text" id="phone" name="phone" required>
+      <button type="submit">ثبت</button>
+    </form>
+  </div>
+
+  <div id="messages-container" style="display: none;"></div>
 
   <button id="install-btn" style="display:none;">نصب اپلیکیشن</button>
 
