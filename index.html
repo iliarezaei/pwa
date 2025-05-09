@@ -3,25 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پیام‌ها</title>
-  <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/images/icon-192x192.png" sizes="192x192" type="image/png">
-  <link rel="icon" href="/images/icon-512x512.png" sizes="512x512" type="image/png">
+  <title>دریافت پیام</title>
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- فونت وزیر از Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #3a6073, #16222a);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      direction: rtl;
+    }
+    button {
+      background-color: #00c6ff;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #0072ff;
+    }
+    #messages {
+      margin-top: 20px;
+      text-align: right;
+      direction: rtl;
+    }
+  </style>
 </head>
 <body>
-  <h1>پیام‌های من</h1>
-
-  <div id="phone-form-container">
-    <form id="phone-form">
-      <label for="phone">شماره تلفن:</label>
-      <input type="text" id="phone" name="phone" required>
-      <button type="submit">ثبت</button>
+  <div class="container">
+    <h2>دریافت پیام</h2>
+    <form id="code-form">
+      <input type="tel" id="user-code" placeholder="شماره تلفن خود را وارد کنید" required>
+      <button type="submit">تأیید</button>
     </form>
+    <div id="messages"></div>
   </div>
-
-  <div id="messages-container" style="display: none;"></div>
-
-  <button id="install-btn" style="display:none;">نصب اپلیکیشن</button>
 
   <script src="app.js"></script>
 </body>
