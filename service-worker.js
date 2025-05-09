@@ -1,22 +1,12 @@
 self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open('message-cache').then((cache) => {
-            return cache.addAll([
-                '/',
-                '/index.html',
-                '/app.js',
-                '/manifest.json',
-                '/icons/icon-192x192.png',
-                '/icons/icon-512x512.png'
-            ]);
-        })
-    );
+  console.log('Service Worker نصب شد');
+  // به صورت پیش‌فرض هیچ فایل خاصی را کش نمی‌کنیم
+});
+
+self.addEventListener('activate', (event) => {
+  console.log('Service Worker فعال شد');
 });
 
 self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            return cachedResponse || fetch(event.request);
-        })
-    );
+  event.respondWith(fetch(event.request)); // اجازه دسترسی به تمام درخواست‌ها
 });
